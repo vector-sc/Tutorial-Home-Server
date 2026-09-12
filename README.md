@@ -56,7 +56,7 @@ end0: <###################> #################### UP ################
 ```
 O exemplo acima mostra algo parecido com o que buscamos. Neste caso específico, end0 é o nome da conexão por cabo de rede, mas não é a única possibilidade (ex:eno0, eno1, enp0s25, eth0). O primeiro endereço de IP encontrado é o ip do dispositivo atual, enquanto o segundo endereço é o "gateway", utilizado para ir até o roteador. Utilizaremos essas informações na configuração do netplan.
 
-Em /etc/netplan, crie um arquivo chamado "99_config.yaml" e preencha-o da forma abaixo (mas não escreva os comentários):
+Em ``/etc/netplan``, crie um arquivo chamado "99_config.yaml" e preencha-o da forma abaixo (mas não escreva os comentários):
 ```
 network:
   version: 2
@@ -76,7 +76,7 @@ Para aplicar a configuração, digite no terminal ``sudo netplan apply``. Caso t
 
 Para confirmar que a rede está funcional, execute o comando ping ``ping xxx.xxx.x.y``, fornecendo o endereço estático de outro computador na rede, como o servidor. Se tudo estiver correto, o terminal avisará que o computador recebeu bytes do computador escolhido e informará quanto tempo demorou para receber uma resposta. Uma falha neste teste pode indicar que o firewall está impedindo a comunicação ou há algum problema na configuração. No caso do firewall, use o comando ``sudo ufw allow from xxx.xxx.x.x/24`` (onde o endereço fornecido é o gateway da rede) nos dispositivos envolvidos.
 
-Por fim, é ideal editar o arquivo em /etc/hosts. Neste arquivo, coloque o endereço estático do servidor e um nome para ele. Isto permite associar a palavra homeServer com o endereço do servidor (ex: ping homeServer). Faça isso para todos os computadores.
+Por fim, é ideal editar o arquivo em ``/etc/hosts``. Neste arquivo, coloque o endereço estático do servidor e um nome para ele. Isto permite associar a palavra homeServer com o endereço do servidor (ex: ping homeServer). Faça isso para todos os computadores.
 ```
 xxx.xxx.x.y homeServer
 ```
@@ -88,7 +88,7 @@ sudo chmod 777 /mnt/pastaCompartilhada
 ```
 Isto faz com que todos tenham permissão de acessar e modificar os conteúdos desta pasta.
 
-Agora, vá até /etc/exports e adicione o caminho para a pasta à ser compartilhada:
+Agora, vá até ``/etc/exports`` e adicione o caminho para a pasta à ser compartilhada:
 ```
 /mnt/pastaCompartilhada *(rw,sync,no_subtree_check)
 ```
@@ -103,7 +103,7 @@ O primeiro argumento é o caminho para a pasta compartilhada no servidor, enquan
 ### Montagem automática
 O único problema com a configuração atual é que para acessar o diretório compartilhado, o cliente deve montar manualmente a pasta toda vez que ligar o computador, sem considerar também que caso o servidor seja desligado, a conexão irá travar, causando vários problemas. Isto pode ser resolvido com o pacote autofs.
 
-No arquivo /etc/auto.master, é preciso adicionar um caminho para um arquivo de configuração para o nosso uso.
+No arquivo ``/etc/auto.master``, é preciso adicionar um caminho para um arquivo de configuração para o nosso uso.
 ```
 /- /etc/auto.fsweb
 ```
