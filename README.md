@@ -9,6 +9,7 @@ O objetivo deste tutorial é ensinar como criar um servidor local em casa. Um se
 - Host de servidores para jogos
 - Armazenamento compartilhado por rede
 - Tudo isso junto (por meio de proxmox)
+
 Devido à essa variedade e considerando as limitações físicas de uma TV Box, focaremos em um servidor com armazenamento compartilhado por rede, porém não se limite à isso. Após compreender os mecanismos básicos, pesquise e experimente!
 
 Além disso, se você é um estudante de Ciência da Computação, o estudo de instalações como esta abre portas para aplicações bem diferentes da computação, fora do desktop comum, ampliando as oportunidades que você pode encontrar futuramente.
