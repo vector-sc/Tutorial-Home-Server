@@ -114,6 +114,7 @@ A extensão do arquivo pode ser qualquer coisa, como .servidor, .fsweb, etc. Nes
 O primeiro argumento é o local onde a pasta será montada no dispositivo atual, seguido por argumentos que configuram a montagem:
 - retry: Número de minutos gastos tentando re-estabelecer a conexão. Caso 0, a primeira falha assume que a conexão foi interrompida.
 - timeo: Tempo em decisegundos (décimos de segundo) que uma tentativa do NFS aguarda esperando uma resposta do servidor.
+
 Por fim, o caminho onde a pasta está localizada no servidor. Após isso, basta reiniciar o computador cliente e, se tudo estiver configurado corretamente, a pasta será montada de forma automática e removida caso a conexão não responda por muito tempo.
 
 # Conclusão
