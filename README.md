@@ -72,7 +72,7 @@ network:
         search: [mydomain, otherdomain]
         addresses: [10.10.10.1, 1.1.1.1]
 ```
-Para aplicar a configuração, digite no terminal ``sudo netplan apply``. Caso tudo esteje correto, não haverá nenhum aviso de erro grave, porem, se necessário, a configuração pode ser revertida renomeando o arquivo para 99_config e aplicando novamente. Faça isto para todos os computadores, providenciando um ip estático para cada um dos clientes e o servidor.
+Para aplicar a configuração, digite no terminal ``sudo netplan apply``. Caso tudo esteja correto, não haverá nenhum aviso de erro grave, porem, se necessário, a configuração pode ser revertida renomeando o arquivo para 99_config e aplicando novamente. Faça isto para todos os computadores, providenciando um ip estático para cada um dos clientes e o servidor.
 
 Para confirmar que a rede está funcional, execute o comando ping ``ping xxx.xxx.x.y``, fornecendo o endereço estático de outro computador na rede, como o servidor. Se tudo estiver correto, o terminal avisará que o computador recebeu bytes do computador escolhido e informará quanto tempo demorou para receber uma resposta. Uma falha neste teste pode indicar que o firewall está impedindo a comunicação ou há algum problema na configuração. No caso do firewall, use o comando ``sudo ufw allow from xxx.xxx.x.x/24`` (onde o endereço fornecido é o gateway da rede) nos dispositivos envolvidos.
 
@@ -98,7 +98,7 @@ Com isso, já é possível testar o compartilhamento. No computador cliente, dig
 ```
 sudo mount homeServer:/mnt/pastaCompartilhada /mnt/pastaCompartilhada
 ```
-O primeiro argumento é o caminho para a pasta compartilhada no servidor, enquanto o segundo é o local onde a pasta será colocada no dispositivo atual. Caso tudo esteje funcionando, a pasta irá aparecer no computador cliente. Ao colocar um arquivo na pasta, este arquivo será transmitido por rede até o servidor, onde será armazenado. 
+O primeiro argumento é o caminho para a pasta compartilhada no servidor, enquanto o segundo é o local onde a pasta será colocada no dispositivo atual. Caso tudo esteja funcionando, a pasta irá aparecer no computador cliente. Ao colocar um arquivo na pasta, este arquivo será transmitido por rede até o servidor, onde será armazenado.
 
 ### Montagem automática
 O único problema com a configuração atual é que para acessar o diretório compartilhado, o cliente deve montar manualmente a pasta toda vez que ligar o computador, sem considerar também que caso o servidor seja desligado, a conexão irá travar, causando vários problemas. Isto pode ser resolvido com o pacote autofs.
@@ -109,9 +109,12 @@ No arquivo /etc/auto.master, é preciso adicionar um caminho para um arquivo de 
 ```
 A extensão do arquivo pode ser qualquer coisa, como .servidor, .fsweb, etc. Neste caso, utilizarei auto.fsweb. Crie o arquivo mencionado no caminho indicado e preencha-o com o seguinte:
 ```
-/mnt/pastaCompartilhada -vers=4,rw,soft,bg,intr,retry=0,retrans=1,timeo=1 homeServer:/mnt/pastaCompartilhada
+/mnt/pastaCompartilhada -vers=4,rw,bg,intr,retry=5,timeo=60 homeServer:/mnt/pastaCompartilhada
 ```
-O primeiro argumento é o local onde a pasta será montada no dispositivo atual, seguido por argumentos que configuram o sistema como número de tentativas de montagem, tempo até timeout, etc. Por fim, o caminho onde a pasta está localizada no servidor. Após isso, basta reiniciar o computador cliente e, se tudo estiver configurado corretamente, a pasta será montada de forma automática e removida caso a conexão não responda por muito tempo.
+O primeiro argumento é o local onde a pasta será montada no dispositivo atual, seguido por argumentos que configuram a montagem:
+- retry: Número de minutos gastos tentando re-estabelecer a conexão. Caso 0, a primeira falha assume que a conexão foi interrompida.
+- timeo: Tempo em decisegundos (décimos de segundo) que uma tentativa do NFS aguarda esperando uma resposta do servidor.
+Por fim, o caminho onde a pasta está localizada no servidor. Após isso, basta reiniciar o computador cliente e, se tudo estiver configurado corretamente, a pasta será montada de forma automática e removida caso a conexão não responda por muito tempo.
 
 # Conclusão
 Apesar deste servidor demonstrado servir para algo bem básico, é importante entender que ter o próprio servidor lhe permite ter mais controle sobre muitas coisas, já que possibilita trazer serviços exclusivamente armazenados na nuvem para sua própria casa por meio de alternativas open-source. Sobre isso, o vídeo abaixo destaca um dos vários problemas causados pela dependência de serviços na nuvem.
