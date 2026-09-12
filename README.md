@@ -114,7 +114,7 @@ A extensão do arquivo pode ser qualquer coisa, como .servidor, .fsweb, etc. Nes
 O primeiro argumento é o local onde a pasta será montada no dispositivo atual, seguido por argumentos que configuram o sistema como número de tentativas de montagem, tempo até timeout, etc. Por fim, o caminho onde a pasta está localizada no servidor. Após isso, basta reiniciar o computador cliente e, se tudo estiver configurado corretamente, a pasta será montada de forma automática e removida caso a conexão não responda por muito tempo.
 
 # Conclusão
-Apesar deste servidor demonstrado servir para algo bem básico, é importante entender que ter o próprio servidor lhe permite ter mais controle sobre muitas coisas, já que possibilita trazr serviços exclusivamente armazenados na nuvem para sua própria casa por meio de alternativas open-source. Sobre isso, o vídeo abaixo destaca uma das preocupações de depender de serviços na nuvem.
+Apesar deste servidor demonstrado servir para algo bem básico, é importante entender que ter o próprio servidor lhe permite ter mais controle sobre muitas coisas, já que possibilita trazer serviços exclusivamente armazenados na nuvem para sua própria casa por meio de alternativas open-source. Sobre isso, o vídeo abaixo destaca um dos vários problemas causados pela dependência de serviços na nuvem.
 
 https://www.youtube.com/watch?v=PFbxapX4bRE
 
