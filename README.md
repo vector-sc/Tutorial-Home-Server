@@ -86,7 +86,7 @@ Para começar, é preciso criar uma pasta onde os arquivos compartilhados serão
 sudo chown nobody:nogroup /mnt/pastaCompartilhada
 sudo chmod 777 /mnt/pastaCompartilhada
 ```
-Isto faz com que todos tenham permissão de acessar e modificar os conteúdos desta pasta.
+O comando ``chown`` altera o dono da pastaCompartilhada para "nínguem" e "nenhum grupo", enquanto o comando ``chmod``altera as permissões da pastaCompartilhada (o código 777 fala que todos podem ler, modificar e executar os arquivos no diretório). Assim, todos tem permissão de acessar e modificar os conteúdos desta pasta.
 
 Agora, vá até ``/etc/exports`` e adicione o caminho para a pasta à ser compartilhada:
 ```
